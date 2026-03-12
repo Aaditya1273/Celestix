@@ -5,7 +5,7 @@ Welcome to Pixen Flow, the go-to open source library for high quality animated R
 <div align="center">
     <br>
     <br>
-    <img src="https://github.com/user-attachments/assets/261b7dc4-de74-425f-b15a-1a7b30b1637d" alt="react-bits logo" height="200">
+    <img src="https://github.com/user-attachments/assets/261b7dc4-de74-425f-b15a-1a7b30b1637d" alt="Celestix logo" height="200">
     <br>
     <br>
 </div>

@@ -102,7 +102,7 @@ const MagnetDemo = () => {
             disabled={disabled}
             magnetStrength={magnetStrength}
           >
-            <a href="https://github.com/DavidHDev/react-bits" target="_blank" rel="noreferrer">
+            <a href="https://github.com/Aaditya1273/Celestix.git" target="_blank" rel="noreferrer">
               <Flex fontSize="lg" color="#FFA500">
                 Star&nbsp;<Text color="#FFA500">Pixen Flow</Text>&nbsp;on GitHub!
               </Flex>

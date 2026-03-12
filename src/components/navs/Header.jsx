@@ -28,7 +28,7 @@ import FadeContent from "../../content/Animations/FadeContent/FadeContent";
 
 const Header = () => {
   const langCollection = useMemo(() => createListCollection({ items: ["JS", "TS"] }), []);
-  const { languagePreset, setLanguagePreset } = useLanguage(); // “JS” | “TS”
+  const { languagePreset, setLanguagePreset } = useLanguage();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { toggleSearch } = useSearch();
   const os = useDeviceOS();
@@ -46,28 +46,27 @@ const Header = () => {
       <Select.Control>
         <Select.Trigger
           fontSize="12px"
-          bg="#060010"
-          border="1px solid #392e4e"
-          rounded="full"
+          bg="transparent"
+          border="none"
           h={10}
           fontWeight={600}
           cursor="pointer"
-          transition="transform 0.3s"
-          _hover={{ transform: "scale(0.98)" }}
+          _hover={{ opacity: 0.8 }}
         >
           <Select.ValueText color="#fff" pl={1} fontSize="12px" />
         </Select.Trigger>
         <Select.IndicatorGroup>
-          <Select.Indicator />
+          <Select.Indicator color="#fff" />
         </Select.IndicatorGroup>
       </Select.Control>
 
       <Portal>
         <Select.Positioner>
           <Select.Content
-            bg="#060010"
-            border="1px solid #392e4e"
-            borderRadius="25px"
+            bg="#0f0f0f"
+            border="1px solid rgba(255,255,255,0.1)"
+            borderRadius="16px"
+            backdropFilter="blur(16px)"
             w="80px"
             px={2}
             py={2}
@@ -77,11 +76,11 @@ const Header = () => {
               <Select.Item
                 item={lang}
                 key={lang}
-                rounded="full"
+                rounded="lg"
                 px={3}
                 py={2}
                 cursor="pointer"
-                _highlighted={{ bg: "#271E37" }}
+                _highlighted={{ bg: "rgba(255,255,255,0.05)" }}
               >
                 {lang}
                 <Select.ItemIndicator />
@@ -94,46 +93,63 @@ const Header = () => {
   );
 
   return (
-    <Box zIndex={100} className="main-nav">
-      <Flex className="nav-items" h={20} alignItems="center" justifyContent="space-between" px={4}>
+    <Box
+      position="fixed"
+      top={4}
+      left="50%"
+      transform="translateX(-50%)"
+      zIndex={1000}
+      w="max-content"
+      maxW="95vw"
+    >
+      <Flex
+        className="glass-effect"
+        h={14}
+        alignItems="center"
+        px={6}
+        rounded="full"
+        gap={6}
+        boxShadow="0 10px 30px rgba(0,0,0,0.5)"
+      >
+        <Link href="/" className="logo-text" style={{ fontWeight: 800, letterSpacing: '-0.5px' }}>
+          CELESTIX
+        </Link>
 
+        <Flex display={{ base: "none", md: "flex" }} alignItems="center" gap={6}>
+          <Link href="/text-animations/text-devider" className="nav-link-premium">
+            Docs
+          </Link>
+          <Link href="/showcase" className="nav-link-premium">
+            Showcase
+          </Link>
+        </Flex>
 
-        <IconButton
-          aria-label="Open Menu"
-          icon={<FiMenu size="1.3em" />}
-          size="md"
-          display={{ md: "none" }}
-          onClick={onOpen}
-        />
+        <Separator orientation="vertical" h={6} borderColor="rgba(255,255,255,0.1)" />
 
-        <Flex display={{ base: "none", md: "flex" }} alignItems="center" gap={2}>
-          <FadeContent blur>
-            <Flex
-              as="button"
-              fontSize="12px"
-              h={10}
-              pr={2}
-              pl={3}
-              rounded="full"
-              bg="#060010"
-              border="1px solid #392e4e"
-              fontWeight={600}
-              align="center"
-              gap={1}
-              cursor="text"
-              userSelect="none"
-              transition="transform 0.3s"
-              _hover={{ transform: "scale(0.98)" }}
-              onClick={toggleSearch}
-            >
-              <Icon as={FiSearch} boxSize={4} color="#392e4e" />
-              <Text mr={8} color="#a6a6a6">Search Pixels</Text>
-              {os === "macOS" ? <Kbd fontSize="10px" px={2} borderRadius="50px"><Icon as={FiCommand} boxSize={2} mr={1} /> K</Kbd> : <Kbd fontSize="10px" px={2} borderRadius="50px">CTRL K</Kbd>}
-            </Flex>
-          </FadeContent>
+        <Flex alignItems="center" gap={3}>
+          <IconButton
+            aria-label="Search"
+            onClick={toggleSearch}
+            className="header-icon-btn"
+            variant="ghost"
+            rounded="full"
+          >
+            <FiSearch />
+          </IconButton>
 
-          <FadeContent blur>{LanguageSelect}</FadeContent>
+          <Box className="language-wrapper">
+            {LanguageSelect}
+          </Box>
 
+          <IconButton
+            aria-label="Open Menu"
+            display={{ md: "none" }}
+            onClick={onOpen}
+            variant="ghost"
+            rounded="full"
+          >
+            <FiMenu />
+          </IconButton>
         </Flex>
       </Flex>
 
@@ -142,50 +158,28 @@ const Header = () => {
         open={isOpen}
         onOpenChange={(v) => (v ? onOpen() : onClose())}
       >
-        <Drawer.Backdrop display={{ md: "none" }}>
-          <Drawer.Content bg="black" h="100%">
-            <Drawer.Body p={0}>
-              <Flex direction="column">
-                <Flex
-                  align="center"
-                  justify="space-between"
-                  h="57px"
-                  px={6}
-                  mb={6}
-                  borderBottom="1px solid #ffffff1c"
+        <Drawer.Positioner top={20} left="50%" transform="translateX(-50%)" w="90vw" maxW="400px">
+          <Drawer.Content className="glass-effect" rounded="2xl" border="1px solid rgba(255,255,255,0.1)">
+            <Drawer.Body py={6} px={6}>
+              <Flex direction="column" gap={4}>
+                <Link href="/" onClick={onClose} className="nav-link-premium">Home</Link>
+                <Link href="/text-animations/text-devider" onClick={onClose} className="nav-link-premium">Docs</Link>
+                <Link href="/showcase" onClick={onClose} className="nav-link-premium">Showcase</Link>
+                <Separator borderColor="rgba(255,255,255,0.1)" />
+                <Link
+                  href="https://davidhaz.com/"
+                  target="_blank"
+                  onClick={onClose}
+                  className="nav-link-premium"
                 >
-
-                  <IconButton
-                    aria-label="Close Menu"
-                    icon={<Icon as={FiStopCircle} boxSize={4} />}
-                    size="md"
-                    display={{ md: "none" }}
-                    onClick={onClose}
-                  />
-                </Flex>
-
-                <Flex direction="column" px={6} gap={2}>
-                  <Text fontWeight="bold">Useful Links</Text>
-                  <RouterLink to="/text-animations/text-devider" onClick={onClose}>
-                    Docs
-                  </RouterLink>
-
-                  <Separator my={4} />
-
-                  <Text fontWeight="bold">Other</Text>
-                  <RouterLink
-                    to="https://davidhaz.com/"
-                    target="_blank"
-                    onClick={onClose}
-                  >
-                    Who made this?
-                    <Icon as={FiArrowRight} transform="rotate(-45deg)" ml={1} />
-                  </RouterLink>
-                </Flex>
+                  <Flex align="center" gap={2}>
+                    Who made this? <Icon as={FiArrowRight} transform="rotate(-45deg)" />
+                  </Flex>
+                </Link>
               </Flex>
             </Drawer.Body>
           </Drawer.Content>
-        </Drawer.Backdrop>
+        </Drawer.Positioner>
       </Drawer.Root>
     </Box>
   );

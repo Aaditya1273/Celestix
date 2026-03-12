@@ -119,7 +119,7 @@ export default function Hero() {
               Docs
             </Link>
             <a
-              href="https://github.com/DavidHDev/react-bits"
+              href="https://github.com/Aaditya1273/Celestix"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-2 px-4 py-2 glass-effect rounded-full hover:bg-white/10 transition-all"

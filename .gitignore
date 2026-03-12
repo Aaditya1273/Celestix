@@ -9,6 +9,7 @@ lerna-debug.log*
 components-mcp.json
 scripts/mcp.js
 
+.next
 node_modules
 dist
 dist-ssr

@@ -1,3 +1,4 @@
+'use client';
 import { useSearch } from '../../context/SearchContext/useSearch';
 import SearchDialog from './SearchDialog';
 

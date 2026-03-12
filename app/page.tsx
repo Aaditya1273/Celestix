@@ -1,3 +1,4 @@
+'use client';
 import Link from 'next/link';
 import Footer from '@/components/landing/Footer/Footer';
 import Hero from '../src/components/landing/Hero/Hero';

@@ -38,7 +38,8 @@
       "@/constants/*": [
         "src/constants/*"
       ]
-    }
+    },
+    "strictNullChecks": true
   },
   "include": [
     "next-env.d.ts",

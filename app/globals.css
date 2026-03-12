@@ -1,0 +1,30 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+}
+
+:root {
+  --background: #000000;
+  --foreground: #ffffff;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+}
+
+/* Custom PixenFlow Styles */
+.gradient-text {
+  @apply bg-linear-to-r from-[#ff8c00] to-[#ff4500] bg-clip-text text-transparent;
+}
+
+.hero-section {
+  @apply min-h-screen flex items-center relative overflow-hidden;
+}
+
+/* Page Transition Styles (from src/styles.css) */
+.page-transition-fade {
+  transition: opacity 0.3s ease-in-out;
+}

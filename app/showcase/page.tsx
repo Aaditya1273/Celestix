@@ -42,7 +42,7 @@ export default function ShowcasePage() {
                         </div>
 
                         <div className="showcase-item p-6 border border-white/10 rounded-lg hover:bg-white/5 transition-all">
-                            <h3 className="text-xl font-semibold mb-2">Backgrouds</h3>
+                            <h3 className="text-xl font-semibold mb-2">Backgrounds</h3>
                             <p className="text-gray-400 mb-4">Engaging visual effects</p>
                             <Link href="/backgrounds/orb" className="text-[#ff8c00] hover:underline">
                                 View Components →

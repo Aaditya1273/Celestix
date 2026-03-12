@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import Link from "next/link";
 import { Box, Button, Flex } from "@chakra-ui/react";
 import { CliTab, CodeTab, PreviewTab, TabbedLayout } from "../../components/common/TabbedLayout";
 
@@ -131,7 +131,7 @@ const CountUpDemo = () => {
           <Flex>
             <span>
               You can wrap the counter with other components such as&nbsp;
-              <Link style={{ display: 'inline', whiteSpace: 'nowrap', color: '#FFA500', textDecoration: 'underline' }} to='/text-animations/gradient-text/'>&lt;GradientText /&gt;</Link>
+              <Link style={{ display: 'inline', whiteSpace: 'nowrap', color: '#FFA500', textDecoration: 'underline' }} href='/text-animations/gradient-text/'>&lt;GradientText /&gt;</Link>
             </span>
           </Flex>
 

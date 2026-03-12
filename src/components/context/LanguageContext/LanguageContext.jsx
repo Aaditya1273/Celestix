@@ -1,4 +1,5 @@
-import { createContext, useState, useEffect } from 'react';
+'use client';
+import React, { createContext, useState, useEffect, useRef } from 'react';
 
 export const LanguageContext = createContext();
 
@@ -6,12 +7,23 @@ export function LanguageProvider({ children }) {
   const [languagePreset, setLanguagePreset] = useState(null);
 
   useEffect(() => {
-    const language = localStorage.getItem('preferredLanguage') || 'TS';
-    setLanguagePreset(language);
+    try {
+      const language = localStorage.getItem('preferredLanguage') || 'TS';
+      setLanguagePreset(language);
+    } catch (e) {
+      console.warn('localStorage access denied:', e);
+      setLanguagePreset('TS');
+    }
   }, [])
 
   useEffect(() => {
-    localStorage.setItem('preferredLanguage', languagePreset)
+    if (languagePreset) {
+      try {
+        localStorage.setItem('preferredLanguage', languagePreset);
+      } catch (e) {
+        console.warn('localStorage access denied:', e);
+      }
+    }
   }, [languagePreset])
 
   return (

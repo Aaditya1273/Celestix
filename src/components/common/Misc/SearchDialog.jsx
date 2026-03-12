@@ -1,3 +1,4 @@
+'use client';
 import { useEffect, useState, useRef, useCallback } from 'react';
 import { Modal, ModalOverlay, ModalContent, ModalBody } from '@chakra-ui/modal';
 import {
@@ -10,7 +11,7 @@ import {
 import { FiSearch, FiLayers, FiImage, FiType, FiCircle } from 'react-icons/fi';
 import { AiOutlineEnter } from 'react-icons/ai';
 import { motion, AnimatePresence, useInView } from 'framer-motion';
-import { useNavigate } from 'react-router-dom';
+import { useRouter } from 'next/navigation';
 import { CATEGORIES } from '../../../constants/Categories';
 import { useSearch } from '../../context/SearchContext/useSearch';
 
@@ -95,7 +96,7 @@ const SearchDialog = ({ isOpen, onClose }) => {
   const [bottomGradientOpacity, setBottomGradientOpacity] = useState(1);
   const [selectedIndex, setSelectedIndex] = useState(-1);
   const resultsRef = useRef(null);
-  const navigate = useNavigate();
+  const router = useRouter();
   const { toggleSearch } = useSearch();
 
   useEffect(() => {
@@ -135,7 +136,7 @@ const SearchDialog = ({ isOpen, onClose }) => {
     const path = `/components/${slug(result.categoryName)}/${slug(
       result.componentName
     )}`;
-    navigate(path);
+    router.push(path);
     onClose();
     toggleSearch();
   };

@@ -1,3 +1,4 @@
+'use client';
 import { createContext, useState, useCallback, useRef } from 'react';
 
 const TransitionContext = createContext();

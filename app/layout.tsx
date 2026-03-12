@@ -3,6 +3,7 @@ import { Inter } from 'next/font/google';
 import './globals.css';
 import { Providers } from './providers';
 import Search from '@/components/common/Misc/Search';
+import Header from '@/components/navs/Header';
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
 
@@ -21,6 +22,7 @@ export default function RootLayout({
         <html lang="en" suppressHydrationWarning>
             <body className={`${inter.variable} font-sans antialiased bg-black text-white`}>
                 <Providers>
+                    <Header />
                     <Search />
                     {children}
                 </Providers>

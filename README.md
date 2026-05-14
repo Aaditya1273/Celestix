@@ -33,7 +33,7 @@ Beyond-The-Fog/
 │   ├── lib/game/            # Narrative Engine & Game Logic
 │   ├── storageManager.js    # 0G Storage & DA Orchestrator
 │   └── index.js             # Unified API Gateway
-├── towns-whisper-next/      # Premium Frontend Application
+├── beyond-the-fog-next/      # Premium Frontend Application
 │   ├── app/                 # 8px Grid Design System
 │   ├── components/          # High-Performance UI Components
 │   └── scenes/              # Cinematic Game Scenes
@@ -52,7 +52,7 @@ npm start
 
 ### 2. Launch the Frontend
 ```bash
-cd towns-whisper-next
+cd beyond-the-fog-next
 npm install
 npm run dev
 ```

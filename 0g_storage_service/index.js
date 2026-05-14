@@ -1,11 +1,17 @@
 import express from "express";
 import cors from "cors";
+import { createServer } from "http";
+import { WebSocketServer } from "ws";
 import { StorageManager } from "./storageManager.js";
 import { INFTManager } from './INFTManager.js';
 import { GameEngine } from './lib/game/gameEngine.js';
+import { RoomManager } from './roomManager.js';
 import { randomUUID } from 'node:crypto';
 
 const app = express();
+const httpServer = createServer(app);
+const wss = new WebSocketServer({ server: httpServer });
+
 app.use(cors());
 app.use(express.json());
 
@@ -14,12 +20,45 @@ const port = process.env.PORT || 3002;
 const storageManager = new StorageManager();
 const inftManager = new INFTManager();
 const gameEngine = new GameEngine();
+const roomManager = new RoomManager(gameEngine, storageManager);
 
-// In-memory session store (move to 0G Storage for persistent sessions later)
+// In-memory session store
 const activeGames = new Map();
+
+// ================= WS HANDLING =================
+wss.on('connection', (ws, req) => {
+  const urlParts = req.url.split('/');
+  if (urlParts[1] === 'ws') {
+    const roomId = urlParts[2];
+    const playerId = urlParts[3];
+    roomManager.handleConnection(ws, roomId, playerId);
+  }
+});
+
+app.get("/ping", (req, res) => {
+  console.log("📡 Ping received");
+  res.json({ status: "pong", timestamp: new Date() });
+});
+
+app.get("/", (req, res) => {
+  res.json({ 
+    name: "Beyond-The-Fog Unified Core",
+    version: "1.0.0",
+    status: "Active",
+    network: "0G Newton Testnet",
+    documentation: "https://github.com/Aaditya1273/Celestix/README.md"
+  });
+});
 
 app.get("/health", (req, res) => {
   res.json({ status: "ok", service: "Unified Core", timestamp: new Date() });
+});
+
+// ================= MULTIPLAYER ENDPOINTS =================
+
+app.post("/create_room", (req, res) => {
+  const roomId = roomManager.createRoom();
+  res.json({ room_id: roomId });
 });
 
 // ================= GAME ENGINE ENDPOINTS =================
@@ -27,7 +66,7 @@ app.get("/health", (req, res) => {
 app.post("/game/new", async (req, res) => {
   try {
     const { num_inaccessible_locations, difficulty, player_id } = req.body;
-    const gameState = await gameEngine.startNewGame(num_inaccessible_locations || 3, difficulty || 'Medium');
+    const gameState = await gameEngine.startNewGame(num_inaccessible_locations || 5, difficulty || 'Medium');
     
     const gameId = randomUUID();
     activeGames.set(gameId, gameState);
@@ -99,6 +138,30 @@ app.post("/game/:gameId/interact", async (req, res) => {
   }
 });
 
+app.post("/game/:gameId/guess", async (req, res) => {
+  try {
+    const { gameId } = req.params;
+    const { location_name, player_id } = req.body;
+
+    const gameState = activeGames.get(gameId);
+    if (!gameState) return res.status(404).json({ error: "Game session not found." });
+
+    const is_correct = gameState.inaccessibleLocations.includes(location_name);
+    const story = is_correct 
+        ? `You have successfully identified ${location_name} as a key site. The mystery unravels...` 
+        : `Nothing of interest was found at ${location_name}.`;
+
+    if (player_id && is_correct) {
+        await storageManager.saveGameState(player_id, { ...gameState, solved: true });
+        await storageManager.makeDataAvailable({ player_id, location_name, event: "mystery_solved" }, "Mystery Solved");
+    }
+
+    res.json({ is_correct, story });
+  } catch (error) {
+    res.status(500).json({ error: "Guess processing failed." });
+  }
+});
+
 // ================= STORAGE ENDPOINTS =================
 
 app.get("/dialogue/:walletAddress", async (req, res) => {
@@ -154,6 +217,20 @@ app.get('/inft/player/:address', async (req, res) => {
     }
 });
 
-app.listen(port, () => {
+// ================= DA ENDPOINTS =================
+
+app.post("/da/disperse", async (req, res) => {
+  try {
+    const { data, description } = req.body;
+    const response = await storageManager.makeDataAvailable(data, description);
+    res.json({ success: true, response });
+  } catch (error) {
+    console.error("DA Dispersal failed:", error);
+    res.status(500).json({ success: false, error: error.message });
+  }
+});
+
+httpServer.listen(port, () => {
   console.log(`🚀 Beyond-The-Fog Unified Core listening at http://localhost:${port}`);
 });
+

@@ -339,6 +339,8 @@ export class StorageManager {
       console.error("❌ Failed to update dialogue root on-chain:", error.message);
       return false;
     }
+  }
+
   async saveGameState(walletAddress, gameState) {
     try {
       console.log(`💾 Persisting game state for ${walletAddress} to 0G Storage...`);

@@ -368,7 +368,7 @@ export class INFTManager extends StorageManager {
         const timestamp = Date.now();
 
         return {
-            name: `Village Mystery Guide #${timestamp.toString().slice(-4)}`,
+            name: `Beyond-The-Fog Guide #${timestamp.toString().slice(-4)}`,
             description:
                 "An AI companion born from your first steps into the mysterious village. This entity will grow and evolve based on your choices, discoveries, and achievements.",
             image: this.build0gUrl(this.stageImages.newborn),
@@ -414,7 +414,7 @@ export class INFTManager extends StorageManager {
         };
 
         return {
-            name: `Village Mystery Guide #${gameData.tokenId || "Unknown"}`,
+            name: `Beyond-The-Fog Guide #${gameData.tokenId || "Unknown"}`,
             description: this.generateStageDescription(stage, gameData),
             image: this.build0gUrl(this.stageImages[stage]),
             external_url: "https://beyond-the-fog.game",

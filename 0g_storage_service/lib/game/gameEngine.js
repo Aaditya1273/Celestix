@@ -108,6 +108,7 @@ export class GameEngine {
             .filter(n => gameState.discoveredNodes.includes(n.node_id))
             .map(n => n.content);
         gameState.knowledgeSummary = "Key points discovered: " + revealedContent.join("; ");
+    }
     serialize(gameState) {
         return JSON.stringify({
             storyTheme: gameState.storyTheme,

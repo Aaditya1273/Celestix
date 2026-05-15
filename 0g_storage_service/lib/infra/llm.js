@@ -61,10 +61,14 @@ export class ZeroGravityAI {
             const amountToDepositEther = ethers.formatEther(amountToDeposit);
             console.log(`💰 Funding 0G Compute Ledger with ${amountToDepositEther} OG...`);
             
-            if (!computeLedger) {
-                await this.broker.ledger.addLedger(parseFloat(amountToDepositEther));
-            } else {
-                await this.broker.ledger.depositFund(parseFloat(amountToDepositEther));
+            try {
+                if (!computeLedger) {
+                    await this.broker.ledger.addLedger(parseFloat(amountToDepositEther));
+                } else {
+                    await this.broker.ledger.depositFund(parseFloat(amountToDepositEther));
+                }
+            } catch (err) {
+                console.warn(`⚠️ Warning: Failed to fund ledger. Proceeding anyway. Error: ${err.message}`);
             }
         }
     }
@@ -74,7 +78,7 @@ export class ZeroGravityAI {
             await this.broker.inference.acknowledgeProviderSigner(LLAMA_PROVIDER_ADDRESS);
         } catch (e) {
             if (!e.message || !e.message.includes("already exists")) {
-                throw e;
+                console.warn(`⚠️ Warning: Failed to acknowledge provider. Proceeding anyway. Error: ${e.message}`);
             }
         }
     }
@@ -84,8 +88,9 @@ export class ZeroGravityAI {
 
         try {
             console.log("📡 Sending inference request to 0G...");
-            const headers = await this.broker.inference.getRequestHeaders(LLAMA_PROVIDER_ADDRESS, prompt);
-            const { endpoint, model } = await this.broker.inference.getServiceMetadata(LLAMA_PROVIDER_ADDRESS);
+            const targetProvider = LLAMA_PROVIDER_ADDRESS;
+            const headers = await this.broker.inference.getRequestHeaders(targetProvider, prompt);
+            const { endpoint, model } = await this.broker.inference.getServiceMetadata(targetProvider);
 
             const response = await fetch(`${endpoint}/chat/completions`, {
                 method: "POST",
@@ -96,20 +101,48 @@ export class ZeroGravityAI {
                 }),
             });
 
-            if (!response.ok) {
-                throw new Error(`0G Provider error: ${response.statusText}`);
-            }
+            if (!response.ok) throw new Error(`0G Provider error: ${response.statusText}`);
 
             const data = await response.json();
             const answer = data.choices[0].message.content;
 
-            // Process on-chain verification
-            await this.broker.inference.processResponse(LLAMA_PROVIDER_ADDRESS, answer, data.id);
+            try {
+                await this.broker.inference.processResponse(targetProvider, answer, data.id);
+            } catch (verifErr) {
+                console.warn(`⚠️ Warning: On-chain verification failed. Error: ${verifErr.message}`);
+            }
 
             return this._cleanJsonResponse(answer);
         } catch (error) {
-            console.error("❌ 0G Compute error:", error);
-            throw error;
+            console.error(`❌ 0G Compute catastrophic failure: ${error.message}`);
+            
+            // Production Circuit Breaker: Failover to Gemini 2.5 Flash
+            if (process.env.GEMINI_API_KEY) {
+                console.log("🔄 0G Network offline. Failing over to Gemini 2.5 Flash...");
+                const response = await fetch(
+                    `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${process.env.GEMINI_API_KEY}`,
+                    {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({
+                            contents: [{ parts: [{ text: prompt }] }],
+                            generationConfig: { temperature: 0.7, maxOutputTokens: 2048 },
+                        })
+                    }
+                );
+
+                if (!response.ok) {
+                    const errData = await response.json().catch(() => ({}));
+                    throw new Error(`Gemini 2.5 Flash failover failed: ${response.status} — ${JSON.stringify(errData)}`);
+                }
+                const data = await response.json();
+                const text = data.candidates?.[0]?.content?.parts?.[0]?.text;
+                if (!text) throw new Error("Invalid response format from Gemini 2.5 Flash");
+
+                return this._cleanJsonResponse(text);
+            } else {
+                throw new Error("0G Galileo Testnet Inference Contracts are currently unresponsive. Please provide a GEMINI_API_KEY in .env to enable the emergency failover circuit breaker and resume gameplay.");
+            }
         }
     }
 

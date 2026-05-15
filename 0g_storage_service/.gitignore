@@ -1,2 +1,11 @@
-node_modules
+node_modules/
 .env
+
+# PM2 logs (keep directory, ignore log files)
+logs/*.log
+
+# Persistent dialogue map (runtime data — not committed)
+data/dialogue-map.json
+
+# Vitest coverage output
+coverage/

@@ -148,7 +148,17 @@ async def interact(game_id: str, request: InteractRequest, background_tasks: Bac
     
     game_state = active_games[game_id]
     try:
-        villager_index = int(request.villager_id.split('_')[1])
+        if not request.villager_id or '_' not in request.villager_id:
+            raise HTTPException(status_code=400, detail="Invalid villager_id format")
+            
+        parts = request.villager_id.split('_')
+        if len(parts) < 2 or not parts[1].isdigit():
+            raise HTTPException(status_code=400, detail="Invalid villager_id index")
+            
+        villager_index = int(parts[1])
+        if villager_index < 0 or villager_index >= len(game_state.villagers):
+             raise HTTPException(status_code=400, detail="Villager index out of range")
+             
         villager_name = game_state.villagers[villager_index]["name"]
         
         frustration = {"friends": len([m for m in game_state.full_npc_memory.get(villager_name, []) if "friend" in str(m.get("content")).lower()])}
@@ -182,7 +192,7 @@ async def complete_game(request: CompleteGameRequest, background_tasks: Backgrou
     """Finalize game and distribute on-chain rewards"""
     try:
         reward_manager = RewardManager()
-        reward_amount = reward_manager.calculate_reward(request.score, request.won)
+        reward_amount = reward_manager.calculate_reward(request.score, request.is_true_ending)
         
         if request.won and reward_amount > 0 and request.user_address:
             # Distribute real FOG reward

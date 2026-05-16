@@ -37,7 +37,7 @@ const Hero = ({ onPlayClick }) => {
       >
         <div className="mb-4 inline-block px-4 py-1 rounded-full border border-teal-500/30 bg-teal-500/5 backdrop-blur-md">
           <span className="text-[10px] uppercase tracking-[0.5em] text-teal-400 font-bold">
-            0G Galileo Testnet Active
+            0G Aristotle Mainnet Active
           </span>
         </div>
 

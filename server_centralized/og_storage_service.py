@@ -9,13 +9,13 @@ from typing import Optional, Dict, Any
 
 logger = logging.getLogger(__name__)
 
-# 0G Newton Testnet Parameters
-INDEXER_RPC = "https://indexer-storage-testnet-turbo.0g.ai"
-EVM_RPC = os.getenv("0G_TESTNET_RPC", "https://evmrpc-testnet.0g.ai")
-USER_REGISTRY_ADDRESS = os.getenv("USER_REGISTRY_ADDRESS", "0x90564782BfCd4abddC749B2209C03F774e82191e")
-GAME_ITEMS_ADDRESS = os.getenv("GAME_ITEMS_ADDRESS", "0x61c54308FD1f5bB2451DE76DADaDE3b590b256e6")
-NARRATIVE_INFT_ADDRESS = os.getenv("NARRATIVE_INFT_ADDRESS", "0x5EFaA2dd48323156ebE3d5B4834d83fcB8bFfcF4")
-STAKING_MANAGER_ADDRESS = os.getenv("STAKING_MANAGER_ADDRESS", "0x2f48419F77E6cD6E9D319Dc1314a1b1008C8ddfB")
+# 0G Aristotle Mainnet Parameters
+INDEXER_RPC = "https://indexer-storage-turbo.0g.ai"
+EVM_RPC = os.getenv("OG_RPC", "https://evmrpc.0g.ai")
+USER_REGISTRY_ADDRESS = os.getenv("USER_REGISTRY_ADDRESS", "0xe36bbfc7767cb6ea98a6fe072dccd80f499d02c2")
+GAME_ITEMS_ADDRESS = os.getenv("GAME_ITEMS_ADDRESS", "0x02762535d0c005bb95dbcb6e1814dc4e38486a80")
+NARRATIVE_INFT_ADDRESS = os.getenv("NARRATIVE_INFT_ADDRESS", "0xb7d1af8bda86bde064ee7842cc4a6bd201a8461a")
+STAKING_MANAGER_ADDRESS = os.getenv("STAKING_MANAGER_ADDRESS", "0x4134c9eb31097693f79c16ef69e12006f68d0daa")
 
 # WrappedOGBase: official 0G precompile — same address on testnet AND mainnet
 # Used for ERC-20 style payments in TradeManager. Rewards use native 0G via StakingManager.

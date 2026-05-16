@@ -2,15 +2,15 @@
 // Configuration for 0G Galileo Testnet (chain 16602)
 // Contracts deployed: 2026-05-16 | Deployer: 0x5aB3036C7d0bA7043E0BB531374dC6c732eC4954
 
-export const CHAIN_ID = `0x${parseInt(process.env.NEXT_PUBLIC_CHAIN_ID || "16602").toString(16)}`;
-export const RPC_URL = process.env.NEXT_PUBLIC_RPC_URL || "https://evmrpc-testnet.0g.ai";
+export const CHAIN_ID = `0x${parseInt(process.env.NEXT_PUBLIC_CHAIN_ID || "16661").toString(16)}`;
+export const RPC_URL = process.env.NEXT_PUBLIC_RPC_URL || "https://evmrpc.0g.ai";
 
 // ── Live Contract Addresses (0G Galileo Testnet) ──────────────────────────────
-export const USER_REGISTRY_ADDRESS  = process.env.NEXT_PUBLIC_USER_REGISTRY_ADDRESS  || "0x90564782BfCd4abddC749B2209C03F774e82191e";
-export const GAME_ITEMS_ADDRESS     = process.env.NEXT_PUBLIC_GAME_ITEMS_ADDRESS     || "0x61c54308FD1f5bB2451DE76DADaDE3b590b256e6";
-export const STAKING_MANAGER_ADDRESS= process.env.NEXT_PUBLIC_STAKING_MANAGER_ADDRESS|| "0x2f48419F77E6cD6E9D319Dc1314a1b1008C8ddfB";
-export const NARRATIVE_INFT_ADDRESS = process.env.NEXT_PUBLIC_NARRATIVE_INFT_ADDRESS || "0x5EFaA2dd48323156ebE3d5B4834d83fcB8bFfcF4";
-export const TRADE_MANAGER_ADDRESS  = process.env.NEXT_PUBLIC_TRADE_MANAGER_ADDRESS  || "0x1284159FA72081846e6a0e947a34CaF2Df9e70Bd";
+export const USER_REGISTRY_ADDRESS  = process.env.NEXT_PUBLIC_USER_REGISTRY_ADDRESS  || "0xe36bbfc7767cb6ea98a6fe072dccd80f499d02c2";
+export const GAME_ITEMS_ADDRESS     = process.env.NEXT_PUBLIC_GAME_ITEMS_ADDRESS     || "0x02762535d0c005bb95dbcb6e1814dc4e38486a80";
+export const STAKING_MANAGER_ADDRESS= process.env.NEXT_PUBLIC_STAKING_MANAGER_ADDRESS|| "0x4134c9eb31097693f79c16ef69e12006f68d0daa";
+export const NARRATIVE_INFT_ADDRESS = process.env.NEXT_PUBLIC_NARRATIVE_INFT_ADDRESS || "0xb7d1af8bda86bde064ee7842cc4a6bd201a8461a";
+export const TRADE_MANAGER_ADDRESS  = process.env.NEXT_PUBLIC_TRADE_MANAGER_ADDRESS  || "0xafbc3f2b0b47275e0d8d483da19d0ecd3bbd81f5";
 
 // WrappedOGBase: official 0G precompile — same address on testnet AND mainnet
 // Works like WETH: deposit() wraps native 0G, withdraw() unwraps it

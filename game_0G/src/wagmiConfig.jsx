@@ -12,23 +12,23 @@ import {
 } from "@tanstack/react-query";
 import { defineChain } from 'viem';
 
-export const ogGalileo = defineChain({
-  id: 16602,
-  name: '0G Galileo',
-  nativeCurrency: { name: '0G', symbol: 'A0GI', decimals: 18 },
+export const ogAristotle = defineChain({
+  id: 16661,
+  name: '0G Aristotle',
+  nativeCurrency: { name: '0G', symbol: '0G', decimals: 18 },
   rpcUrls: {
-    default: { http: ['https://evmrpc-testnet.0g.ai'] },
+    default: { http: ['https://evmrpc.0g.ai'] },
   },
   blockExplorers: {
-    default: { name: '0G Scan', url: 'https://scan-testnet.0g.ai' },
+    default: { name: '0G Scan', url: 'https://chainscan.0g.ai' },
   },
-  testnet: true,
+  testnet: false,
 });
 
 export const config = getDefaultConfig({
   appName: 'Beyond The Fog',
   projectId: process.env.NEXT_PUBLIC_STITCH_PROJECT_ID || '5f698552d0b018a74f7b4e02980d3cc7', 
-  chains: [ogGalileo],
+  chains: [ogAristotle],
   ssr: false, 
 });
 

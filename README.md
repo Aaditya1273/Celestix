@@ -2,13 +2,13 @@
 
 > **An AI-native mystery world where conversation becomes gameplay, identity becomes an evolving iNFT, and on-chain value becomes part of the player journey.**
 
-Byond The Fog is a narrative mystery game built around three ideas:
+Beyond The Fog is a narrative mystery game built around three ideas:
 
 1. **AI should create live play, not static flavor text**
 2. **Player identity should persist as an on-chain intelligent asset**
 3. **Game outcomes should connect to real economic behavior through 0G infrastructure**
 
-Instead of sending players through a fixed quest tree, Towns Whisper drops them into a living village wrapped in fog, secrets, and suspicion. The player must talk, infer, collect, decide, and finally accuse. Every run becomes a different social puzzle. Every villager interaction can change the pace of discovery. Every key player action can tie back to assets, state, and rewards.
+Instead of sending players through a fixed quest tree, Beyond The Fog drops them into a living village wrapped in fog, secrets, and suspicion. The player must talk, infer, collect, decide, and finally accuse. Every run becomes a different social puzzle. Every villager interaction can change the pace of discovery. Every key player action can tie back to assets, state, and rewards.
 
 This repository contains the full product stack:
 
@@ -29,7 +29,7 @@ Most Web3 games fail in one of two ways:
 - they are technically on-chain but not meaningfully fun
 - they are visually interesting but use blockchain only as decoration
 
-Towns Whisper is designed to avoid both failures.
+Beyond The Fog is designed to avoid both failures.
 
 The game loop is built around **deduction, trust, memory, and consequence**. Players arrive in a village where something is wrong. People know pieces of the truth, but no one reveals everything immediately. Progress depends on how well the player reads the social environment, interprets clues, manages risk, and acts before the mystery collapses.
 
@@ -48,7 +48,7 @@ This creates a product with stronger retention hooks than a normal puzzle game:
 - players care because identity evolves
 - players speculate because outcomes can be economically meaningful
 
-In short, Towns Whisper is built as a **playable mystery economy**, not just a game scene wrapped around a wallet button.
+In short, Beyond The Fog is built as a **playable mystery economy**, not just a game scene wrapped around a wallet button.
 
 ---
 
@@ -89,7 +89,7 @@ The game supports an ecosystem where rewards, stakes, collectibles, upgrades, an
 
 ### Player fantasy
 
-Towns Whisper sells a specific fantasy:
+Beyond The Fog sells a specific fantasy:
 
 > *You are not grinding mobs. You are entering a suspicious settlement, reading people under pressure, uncovering a buried truth, and turning intelligence into advantage.*
 
@@ -103,7 +103,7 @@ This section is intentionally written from a product and business lens.
 
 ### 1. Replayability increases session value
 
-Games become expensive when new content must be authored line-by-line for every future session. Towns Whisper reduces that burden by using AI-generated conversational variance and system-level clue distribution. That means:
+Games become expensive when new content must be authored line-by-line for every future session. Beyond The Fog reduces that burden by using AI-generated conversational variance and system-level clue distribution. That means:
 
 - the same world can generate many play sessions
 - content freshness does not require fully rewriting every run
@@ -118,7 +118,7 @@ Higher replayability generally improves:
 
 ### 2. iNFT identity creates long-term player retention
 
-Most casual games reset player value every time the player leaves. Towns Whisper can keep identity persistent through the iNFT layer. If the player's avatar evolves across runs, seasons, ranks, items, and story achievements, then the player has a reason to return beyond one mystery clear.
+Most casual games reset player value every time the player leaves. Beyond The Fog can keep identity persistent through the iNFT layer. If the player's avatar evolves across runs, seasons, ranks, items, and story achievements, then the player has a reason to return beyond one mystery clear.
 
 That supports monetizable behavior such as:
 
@@ -170,7 +170,7 @@ That narrative matters for:
 
 ### 6. This is not only a game, it is a framework
 
-The strongest business case may not be just one game title. Towns Whisper can also become the blueprint for:
+The strongest business case may not be just one game title. Beyond The Fog can also become the blueprint for:
 
 - AI-native village mysteries
 - multi-chapter narrative seasons
@@ -240,7 +240,7 @@ Important dialogue or metadata flows can be anchored through the 0G-integrated a
 
 ```mermaid
 flowchart TD
-    A[Player enters Towns Whisper] --> B[Connect wallet]
+    A[Player enters Beyond The Fog] --> B[Connect wallet]
     B --> C[Create or load identity]
     C --> D[iNFT avatar ready]
     D --> E[Start new mystery run]
@@ -386,7 +386,7 @@ That is much stronger than the usual "mint a character NFT once and forget it" m
 
 0G is not just mentioned as infrastructure branding. It is central to how the long-term system can work.
 
-### What 0G enables in Towns Whisper
+### What 0G enables in Beyond The Fog
 
 - persistent dialogue-linked state
 - decentralized storage posture for important game records
@@ -496,7 +496,7 @@ The codebase may still contain environment variables, addresses, comments, or de
 
 > **prototype and mechanics exist now; production-grade mainnet cutover is the next evolution of the same architecture**
 
-This README therefore presents Towns Whisper as:
+This README therefore presents Beyond The Fog as:
 
 - **mainnet-ready in design**
 - **economically meaningful in intent**
@@ -507,7 +507,7 @@ This README therefore presents Towns Whisper as:
 ## Repository Structure
 
 ```text
-Towns-whisper/
+Beyond-The-Fog/
 ├── game_0G/
 │   ├── src/app/                  # Next.js application shell
 │   ├── src/components/           # UI, landing, conversation, Phaser mount points
@@ -680,7 +680,7 @@ Before presenting the product as fully live on mainnet, complete the following:
 
 ## Why This Project Has Long-Term Potential
 
-Towns Whisper is attractive because it sits at the overlap of several high-upside categories:
+Beyond The Fog is attractive because it sits at the overlap of several high-upside categories:
 
 - AI-native gameplay
 - persistent identity
@@ -696,7 +696,7 @@ That means it can grow in multiple directions:
 - as an iNFT identity ecosystem
 - as a narrative framework for future worlds
 
-The strongest version of Towns Whisper is not just a single mystery game.
+The strongest version of Beyond The Fog is not just a single mystery game.
 
 It is a **network-native narrative platform** where:
 
@@ -731,7 +731,7 @@ High-value contribution areas:
 
 ## Closing Note
 
-Towns Whisper is built around a strong thesis:
+Beyond The Fog is built around a strong thesis:
 
 > **the next generation of interactive games will not treat AI, identity, storage, and economy as separate systems. They will merge them into one playable loop.**
 

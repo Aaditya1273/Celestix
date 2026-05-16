@@ -11,6 +11,13 @@ out/
 # Env/secrets
 .env
 **/*.env
+.vscode
+.venv
+.codex
+
+info.md 
+info2.md 
+Roadmap.md
 
 # OS/Editor
 .DS_Store

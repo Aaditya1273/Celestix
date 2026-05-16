@@ -1,0 +1,13 @@
+{
+    "include": [
+        "server_centralized"
+    ],
+    "exclude": [
+        "**/node_modules",
+        "**/venv",
+        "**/__pycache__",
+        "**/__pyrefly_virtual__"
+    ],
+    "venvPath": "server_centralized",
+    "venv": "venv"
+}
